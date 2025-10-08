@@ -32,7 +32,7 @@ public class MainSystem {
 
 		do {
 			// メニューの表示
-			System.out.println(Constants.TITLE); // ↓↓定数化
+			System.out.println(Constants.TITLE);
 			System.out.println(Constants.MENU_1);
 			System.out.println(Constants.MENU_2);
 			System.out.println(Constants.MENU_3);
@@ -40,17 +40,17 @@ public class MainSystem {
 			System.out.println(Constants.MENU_5);
 			System.out.println(Constants.MENU_6);
 			System.out.println(Constants.MENU_7);
-			System.out.print(Constants.MSG_MENU); // ↑↑
+			System.out.print(Constants.MSG_MENU);
 
 			// メニュー番号の入力
-			String inputMenuNum = br.readLine(); // menuNoStrから変更
+			String inputMenuNum = br.readLine();
 			menuNum = Integer.parseInt(inputMenuNum);
 
 			// 機能の呼出
 			switch (menuNum) {
 			case 1:
 				// 全件表示機能の呼出
-				DBController.findAll(); // find()から変更
+				DBController.findAll();
 				break;
 
 			case 2:
@@ -58,28 +58,28 @@ public class MainSystem {
 				System.out.print("社員名:");
 
 				// 検索機能の呼出
-				DBController.findByName(); // findB()から変更
+				DBController.findByName();
 				break;
 
 			case 3:
 				// 検索する部署IDを入力
-				System.out.print(Constants.MSG_INPUT_DEPTID); // 定数化
-				String inputDeptId = br.readLine(); // deptIdAから変更
+				System.out.print(Constants.MSG_INPUT_DEPTID);
+				String inputDeptId = br.readLine();
 
 				// 検索機能の呼出
-				DBController.findByDeptId(inputDeptId); // find()から変更
+				DBController.findByDeptId(inputDeptId);
 				break;
 
 			case 4:
 				// 登録する値を入力
 				System.out.print("社員名:");
-				String empName = br.readLine(); // emp_nameから変更
+				String empName = br.readLine();
 				System.out.print("性別(0:その他, 1:男性, 2:女性, 9:回答なし):");
-				String gender = br.readLine(); // Seibetsuから変更
+				String gender = br.readLine();
 				System.out.print("生年月日(西暦年/月/日):");
 				String birthday = br.readLine();
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
-				String deptId = br.readLine(); // deptIdBから変更
+				String deptId = br.readLine();
 
 				// 登録機能の呼出
 				DBController.insert(empName, gender, birthday, deptId);
@@ -87,15 +87,15 @@ public class MainSystem {
 
 			case 5:
 				// 更新する社員IDを入力
-				System.out.print(Constants.MSG_INPUT_UPDATE_EMPID); // 定数化
+				System.out.print(Constants.MSG_INPUT_UPDATE_EMPID);
 
 				// 更新する値を入力する
-				String inputEmpId = br.readLine(); //empId_1から変更
+				String inputEmpId = br.readLine();
 				Integer.parseInt(inputEmpId);
 
 				// 更新機能の呼出
 				DBController.update(inputEmpId);
-				System.out.println(Constants.MSG_UPDATE_COMPLETE); // 定数化
+				System.out.println(Constants.MSG_UPDATE_COMPLETE);
 
 				break;
 
