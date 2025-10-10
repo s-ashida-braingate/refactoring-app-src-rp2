@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import jp.co.sss.crud.db.DBController;
+import jp.co.sss.crud.dao.EmployeeDAO;
+import jp.co.sss.crud.service.EmployeeFindAllService;
 import jp.co.sss.crud.util.Constants;
 
 /**
@@ -27,6 +28,8 @@ public class MainSystem {
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, ParseException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		EmployeeDAO employeeDAO = new EmployeeDAO();
 
 		int menuNum = 0; // menuNoから変更
 
@@ -50,15 +53,16 @@ public class MainSystem {
 			switch (menuNum) {
 			case 1:
 				// 全件表示機能の呼出
-				DBController.findAll();
+				EmployeeFindAllService employeeFindAllService = new EmployeeFindAllService();
+				employeeFindAllService.showAllEmployees();
 				break;
 
 			case 2:
 				// 社員名検索
-				System.out.print("社員名:");
+				System.out.print(Constants.INPUT_EMPNAME);
 
 				// 検索機能の呼出
-				DBController.findByName();
+				employeeDAO.findByName();
 				break;
 
 			case 3:
@@ -67,22 +71,22 @@ public class MainSystem {
 				String inputDeptId = br.readLine();
 
 				// 検索機能の呼出
-				DBController.findByDeptId(inputDeptId);
+				employeeDAO.findByDeptId(inputDeptId);
 				break;
 
 			case 4:
 				// 登録する値を入力
-				System.out.print("社員名:");
+				System.out.print(Constants.INPUT_EMPNAME);
 				String empName = br.readLine();
-				System.out.print("性別(0:その他, 1:男性, 2:女性, 9:回答なし):");
+				System.out.print(Constants.INPUT_GENDER);
 				String gender = br.readLine();
-				System.out.print("生年月日(西暦年/月/日):");
+				System.out.print(Constants.INPUT_BIRTHDAY);
 				String birthday = br.readLine();
-				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
+				System.out.print(Constants.INPUT_DEPTID);
 				String deptId = br.readLine();
 
 				// 登録機能の呼出
-				DBController.insert(empName, gender, birthday, deptId);
+				employeeDAO.insert(empName, gender, birthday, deptId);
 				break;
 
 			case 5:
@@ -94,7 +98,7 @@ public class MainSystem {
 				Integer.parseInt(inputEmpId);
 
 				// 更新機能の呼出
-				DBController.update(inputEmpId);
+				employeeDAO.update(inputEmpId);
 				System.out.println(Constants.MSG_UPDATE_COMPLETE);
 
 				break;
@@ -104,7 +108,7 @@ public class MainSystem {
 				System.out.print(Constants.MSG_INPUT_DELETE_EMPID);
 
 				// 削除機能の呼出
-				DBController.delete();
+				employeeDAO.delete();
 				break;
 
 			}
